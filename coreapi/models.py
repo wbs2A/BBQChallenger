@@ -1,6 +1,13 @@
 from django.db import models
 
 
+#TODO
+#remoção de convidado
+#usuario logado cancela participação
+#cadastrar no churrasco
+
+
+
 class Guest(models.Model):
     name = models.CharField(max_length=70)
     drinks = models.BooleanField(help_text="Este convidado irá beber?")
@@ -31,6 +38,9 @@ class Barbeque(models.Model):
 
     def getColabValue(self):
         return self.COLAB_VALUE
+
+    def getOrganizer(self):
+        return self.organized_by
 
     def setColabValue(self, value):
         self.COLAB_VALUE = value

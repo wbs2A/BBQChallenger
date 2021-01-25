@@ -1,0 +1,25 @@
+{% extends 'coreview/base.html' %}
+{% load static %}
+{% block title %}Churrasco HM{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row" style="padding-right: 2%">
+            {% for bbq in list %}
+                <div class="col-xs col-md-6 col-lg-4">
+                    <div class="card col" style="width: 30rem;">
+                        {% with image_static='img/placeholder1.jpg'%}
+                            <img src="{% static image_static %}" class="card-img-top img-responsive">
+                        {% endwith %}
+                      <div class="card-body">
+                        <h5 class="card-title">Churrasco da empresa, organizado por {{ bbq.organized_by }}</h5>
+                        <p class="card-text">O valor para cada colaborador é de {{ bbq.COLAB_VALUE }}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      </div>
+                    </div>
+                </div>
+                {% empty %}
+                <span>Ainda não foi organizado nenhum churrasco! Aguarde que em breve o próximo churrasco aparecerá aqui.</span>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

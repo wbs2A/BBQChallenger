@@ -1,0 +1,23 @@
+@import url(https://fonts.googleapis.com/css?family=Radley);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono);
+.btn:focus {
+  box-shadow: none;
+}
+
+#brand_name{
+    line-height: 1.5em;
+    padding-top: 3%;
+}
+
+i{
+    border: none !important;
+}
+#h_name{
+    font-family: 'Radley', serif;
+    font-size: 4vh;
+}
+
+#c_name{
+    font-family: 'Roboto Mono', monospace;
+    font-size: 3vh;
+}

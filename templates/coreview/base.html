@@ -1,0 +1,73 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Website criado para o desafio prático da HammerConsult! Esta plataforma foi desenvolvida com python 3 e Django 2.2.">
+    <meta name="author" content="Wesley Barbosa">
+    <meta name="generator" content="Beta v0.0.1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/706f0392d6.js" crossorigin="anonymous"></script>
+    <script data-require="jquery@*" data-semver="2.1.1" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script data-require="bootstrap@*" data-semver="3.2.0" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Radley' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <title>{% block title %}    {% endblock %}</title>
+  </head>
+    <body>
+        <div id="navbar col">
+            <div class="row text-white" style="background-color: #004861; padding:5px; font-size: 70%">
+                <div class="col-md-4 text-center align-middle" style="padding-top: .5%">
+                        <i class="fa fa-phone"></i>(67) 99896-7445
+                        <i class="fa fa-envelope"></i> barbosawesley101@gmail.com
+
+                </div>
+                <div class="col text-right">
+                    <i class="btn btn-outline-primary fa fa-facebook-square text-white"></i>
+                    <i class="btn btn-outline-primary fa fa-instagram text-white"></i>
+                    <i class="btn btn-outline-primary fa fa-linkedin-square text-white"></i>
+                </div>
+            </div>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand logo" href="#"><img src="{% static 'img/hmconsult-logo.png' %}"></a>
+                <ul id="brand_name" class="list-unstyled text-center " style="color: #0c4766">
+                    <li><span id="h_name" class="text-uppercase">Hammer</span></li>
+                    <li><span id="c_name" >Consult</span></li>
+                </ul>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse align-right" id="navbarSupportedContent">
+                    {% if user.is_authenticated %}
+                        <div class="dropdown col-2">
+                            <button class="btn  btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-alt"></i> </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="#">Minhas confirmações <span class="float-right"><i class="fa fa-list"></i></span></a>
+                              <a class="dropdown-item" href="#">Perfil <span class="float-right"><i class="fa fa-wrench"></i></span></a>
+                              <a class="dropdown-item" href="#">Sair <span class="float-right"> <i class="fa fa-sign-out-alt"></i></span></a>
+                          </div>
+
+                        </div>
+                    {% else %}
+                        <div>
+                            <a class="btn btn-black" href="#">Cadastrar/Acessar</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </nav>
+        </div>
+        <div id="content">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        {% block script %}
+        {% endblock %}
+    </body>
+</html>
