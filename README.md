@@ -15,4 +15,4 @@ As imagens do card são selecionadas aleatoriamente, dentre as disponíveis nos 
 
 Para acessar o painel administrativo com um usuário nível staff, pode-se usar estes dados:
 - usuário: admin
-- senha: @dm1nV3rdE
+- senha: @dm1nV3rde
