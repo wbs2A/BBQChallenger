@@ -1,0 +1,27 @@
+{% extends 'coreview/base.html' %}
+{% load static %}
+{% block title %}Confirmar presença{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <h1> Confirme sua participação</h1>
+        <form method="post" action="{% url 'do_confirm' %}" class="form form-group">
+            {% csrf_token %}
+            <input name="bbq" type="hidden" value="{{ bbq}}">
+            <input type="text" disabled class="form-control" value="{{ user.email }}">
+            <input id="emp_drinks" type="checkbox" name="employee_drinks">
+            <label for="emp_drinks">Você irá consumir bebidas?</label>
+            <div class="row">
+                <div class="col">
+                    <input id="guest_check" type="checkbox" name="have_guest">
+                    <label for="have_guest">Você irá levar um convidade?</label>
+                </div>
+                <div class="col">
+                    <input id="guest_drinks" type="checkbox" name="guest_drinks">
+                    <label for=guest_drinks">Este convidade irá consumir bebidas?</label>
+                </div>
+            </div>
+            <button class="btn btn-primary form-control" type="submit"> Confirmar </button>
+        </form>
+
+    </div>
+{% endblock %}

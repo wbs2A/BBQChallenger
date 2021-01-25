@@ -1,19 +1,36 @@
 {% extends 'coreview/base.html' %}
 {% load static %}
+{% load get_employee %}
 {% block title %}Churrasco HM{% endblock %}
 {% block content %}
     <div class="container-fluid">
         <div class="row" style="padding-right: 2%">
             {% for bbq in list %}
                 <div class="col-xs col-md-6 col-lg-4">
-                    <div class="card col" style="width: 30rem;">
-                        {% with image_static='img/placeholder1.jpg'%}
-                            <img src="{% static image_static %}" class="card-img-top img-responsive">
+                    <div class="card col" style="width: 30rem; max-height: 50px">
+                        {% with image_static='img/placeholder'%}
+                            <a class="btn" href="{% url 'detail_bbq' bbq.id %}"><img src="{% static image_static %}{{ placeholders |random }}.jpg" class="card-img-top img-responsive"></a>
                         {% endwith %}
                       <div class="card-body">
                         <h5 class="card-title">Churrasco da empresa, organizado por {{ bbq.organized_by }}</h5>
                         <p class="card-text">O valor para cada colaborador é de {{ bbq.COLAB_VALUE }}</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                          {% if user.is_authenticated %}
+                              {% if bbq.participants.all|check_employee:user.id %}
+                                  <form method="post" action="{% url 'cancel_register' %}">
+                                    {% csrf_token %}
+                                    <input name="user" type="hidden" value="{{ user.id }}"></input>
+                                    <input name="bbq" type="hidden" value="{{ bbq.id }}"></input>
+                                    <button class="btn btn-danger" type="submit">Cancelar presença</button>
+                                  </form>
+                              {% else %}
+                                <form method="post" action="{% url 'confirm_register' %}">
+                                    {% csrf_token %}
+                                    <input name="user" type="hidden" value="{{ user.id }}"></input>
+                                    <input name="bbq" type="hidden" value="{{ bbq.id }}"></input>
+                                    <button class="btn btn-primary" type="submit">Confirmar presença</button>
+                                  </form>
+                              {% endif %}
+                          {% endif %}
                       </div>
                     </div>
                 </div>

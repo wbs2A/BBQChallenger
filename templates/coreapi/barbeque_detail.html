@@ -1,0 +1,43 @@
+{% extends 'coreview/base.html' %}
+{% load static %}
+{% block title %}Detalhes do churrasco{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <h3 class="text-center">Participarão deste churrasco:</h3>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Participante</th>
+                <th scope="col"> Consumirá bebidas?</th>
+                <th scope="col"> Levará convidado?</th>
+                <th scope="col"> O convidado irá consumir bevidas??</th>
+            </tr>
+        </thead>
+        <tbody >
+            {% for pessoa in participantes %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td> {{ pessoa.user }}</td>
+                    <td class="text-center"> <input disabled type="checkbox" checked="{{ pessoa.drinks }}"></td>
+                    <td class="text-center"> <input disabled type="checkbox" checked="{{ pessoa.guest }}"> </td>
+                    <td class="text-center"> <input disabled type="checkbox" checked="{{ pessoa.guest_drink }}"></td>
+                </tr>
+            {% endfor %}
+            <tr>
+                    <th scope="row"> Total de convidados: </th>
+                    <td class="text-center"> {{ participantes.count }} </td>
+                    <td class="text-center"> - </td>
+                    <td class="text-center"> {{ convidados }}</td>
+                    <td class="text-center">  - </td>
+
+                </tr>
+        </tbody>
+    </table>
+    <h3> Para este Churrasco temos</h3><br>
+        <p>Foi arrecadada a quantia de: R${{ total }}</p>
+        <p>Desta quantia R${{ comida }} será gasto com comida</p>
+        <p> R${{ bebida }} será gasto com bebidas</p>
+        <p>Com isso o total gasto será: R${{ total }}</p>
+    </div>
+{% endblock %}

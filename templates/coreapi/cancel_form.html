@@ -1,0 +1,21 @@
+{% extends 'coreview/base.html' %}
+{% load static %}
+{% block title %}Cancelar inscrição{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <h1>Selecione a opção que deseja:</h1><br>
+        <form method="post" action="{% url 'do_cancel_employee' %}" class="form form-group">
+            {% csrf_token %}
+            <input name="bbq" type="hidden" value="{{bbq}}">
+            <input name="user" type="hidden" value="{{user.id}}">
+            <input type="text" disabled class="form-control" value="{{user.email}}"><br>
+            <button class="btn btn-danger form-control" type="submit"> Cancelar sua participação </button>
+        </form>
+        <form method="post" action="{% url 'do_cancel_guest' %}" class="form form-group">
+            {% csrf_token %}
+            <input name="bbq" type="hidden" value="{{ bbq}}">
+            <input name="user" type="hidden" value="{{user.id}}">
+            <button class="btn btn-warning form-control" type="submit">Cancelar participação do seu Convidade </button>
+        </form>
+    </div>
+{% endblock %}

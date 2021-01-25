@@ -40,20 +40,19 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse align-right" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse align-right" style="float: right!important; padding-left:50%" id="navbarSupportedContent">
                     {% if user.is_authenticated %}
-                        <div class="dropdown col-2">
+                        <div class="dropdown col-2" >
                             <button class="btn  btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-alt"></i> </button>
                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <a class="dropdown-item" href="#">Minhas confirmações <span class="float-right"><i class="fa fa-list"></i></span></a>
-                              <a class="dropdown-item" href="#">Perfil <span class="float-right"><i class="fa fa-wrench"></i></span></a>
-                              <a class="dropdown-item" href="#">Sair <span class="float-right"> <i class="fa fa-sign-out-alt"></i></span></a>
+                              <a class="dropdown-item disabled" href="#">Perfil <span class="float-right"><i class="fa fa-wrench"></i></span></a>
+                              <a class="dropdown-item" href="/accounts/logout">Sair <span class="float-right"> <i class="fa fa-sign-out-alt"></i></span></a>
                           </div>
 
                         </div>
                     {% else %}
                         <div>
-                            <a class="btn btn-black" href="#">Cadastrar/Acessar</a>
+                            <a class="btn btn-black" href="/accounts/login">Cadastrar/Acessar</a>
                         </div>
                     {% endif %}
                 </div>

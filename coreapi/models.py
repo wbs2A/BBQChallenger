@@ -1,40 +1,25 @@
 from django.db import models
-
-
-#TODO
-#remoção de convidado
-#usuario logado cancela participação
-#cadastrar no churrasco
-
-
-
-class Guest(models.Model):
-    name = models.CharField(max_length=70)
-    drinks = models.BooleanField(help_text="Este convidado irá beber?")
-
-    class Meta:
-        verbose_name_plural = "Guests"
-
-    def __str__(self):
-        return self.name
+from django.contrib.auth.models import User
 
 
 class Employee(models.Model):
-    name = models.CharField(max_length=70)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     drinks = models.BooleanField(help_text="Este funcionário irá beber?")
-    guests = models.ManyToManyField(Guest, blank=True)
+    guest = models.BooleanField(blank=True)
+    guest_drink = models.BooleanField(blank=True)
 
     def __str__(self):
-        return self.name if self.name else 'Nome não informado'
+        return self.user.username
 
 
 class Barbeque(models.Model):
     COLAB_VALUE = 20
     organized_by = models.CharField(max_length=70, blank=True)
     participants = models.ManyToManyField(Employee)
+    _date = models.DateField(blank='true')
 
     def __str__(self):
-        return self.organized_by+"'s BBQ" if self.organized_by else ""
+        return self.organized_by + "'s BBQ" if self.organized_by else ""
 
     def getColabValue(self):
         return self.COLAB_VALUE
@@ -45,18 +30,30 @@ class Barbeque(models.Model):
     def setColabValue(self, value):
         self.COLAB_VALUE = value
 
-    def totalAmount(self):
-        pass
-
     def getParticipants(self):
-        pass
+        return self.participants.all()
 
     def getGuests(self):
-        pass
+        guests = 0
+        for participant in self.getParticipants():
+            if participant.guest:
+                guests += 1
+        return guests
 
     def getFoodAmount(self):
-        pass
+        total_participants = self.participants.count() + self.getGuests()
+        return self.COLAB_VALUE * total_participants
 
     def getDrinkAmount(self):
-        pass
+        total = 0
+        for participant in self.getParticipants():
+            if participant.drinks:
+                total += 1
+                print(total)
+            if participant.guest_drink:
+                total += 1
+                print(total)
+        return self.COLAB_VALUE * total
 
+    def totalAmount(self):
+        return self.getFoodAmount() + self.getDrinkAmount()

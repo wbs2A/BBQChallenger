@@ -1,0 +1,20 @@
+{% extends 'coreview/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Entrar
+{% endblock %}
+
+{% block content %}
+        <div class="card col d-flex justify-content-center">
+            <div class="card-body">
+                <h2> Entrar </h2>
+                <form method="post" class="form-group">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button class="btn btn-success" type="submit">Entrar</button>
+                </form>
+                <a href="/accounts/signup"> Ainda não se cadastrou? </a>
+            </div>
+    </div>
+
+{% endblock %}
