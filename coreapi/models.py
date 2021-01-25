@@ -49,10 +49,8 @@ class Barbeque(models.Model):
         for participant in self.getParticipants():
             if participant.drinks:
                 total += 1
-                print(total)
             if participant.guest_drink:
                 total += 1
-                print(total)
         return self.COLAB_VALUE * total
 
     def totalAmount(self):
